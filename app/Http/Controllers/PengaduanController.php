@@ -38,7 +38,7 @@ class PengaduanController extends Controller
             'user_id' => Auth::id(),
             'judul' => $request->judul,
             'isi' => $request->isi,
-            'foto' => $buktiPath,
+            'bukti' => $buktiPath,
             'status' => 'menunggu', // status default
         ]);
 
