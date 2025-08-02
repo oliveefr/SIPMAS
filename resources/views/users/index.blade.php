@@ -1,7 +1,14 @@
-@extends('layouts.app') {{-- ganti dengan layout kamu --}}
+
+@extends('partials.dashboard')
+
+@section('title', 'Dashboard')
+
+@section('sidebar')
+    @include('layouts.sidebar')
+@endsection
 
 @section('content')
-<div class="container">
+ <div class="container">
     <h3 class="mb-4">Data Masyarakat</h3>
 
     @if(session('success'))
@@ -50,4 +57,6 @@
         </tbody>
     </table>
 </div>
+
+
 @endsection
