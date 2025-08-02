@@ -24,6 +24,8 @@ Route::middleware('auth')->group(function () {
     Route::middleware(['role:masyarakat'])->group(function () {
         Route::resource('pengaduan', PengaduanController::class);
     });
+    Route::post('/tanggapan', [TanggapanController::class, 'store'])->middleware('auth')->name('tanggapan.store');
+
 
     // Role: admin_master dan petugas
     Route::middleware(['role:admin_master|petugas'])->group(function () {
