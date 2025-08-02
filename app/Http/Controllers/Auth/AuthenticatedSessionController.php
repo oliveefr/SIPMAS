@@ -11,16 +11,13 @@ use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
 {
-    /**
-     * Display the login view.
-     */
     public function create(): View
     {
         return view('auth.login');
     }
 
     /**
-     * Handle an incoming authentication request.
+     * Proses login pengguna.
      */
     public function store(LoginRequest $request): RedirectResponse
     {
@@ -28,12 +25,17 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        $user = Auth::user();
+
+        // Arahkan berdasarkan peran
+        if ($user->hasRole('admin_master') || $user->hasRole('petugas')) {
+            return redirect()->intended(route('dashboard'));
+        }
+
+        // Jika user biasa (tanpa role admin atau petugas)
+        return redirect()->intended(route('pengaduan.index'));
     }
 
-    /**
-     * Destroy an authenticated session.
-     */
     public function destroy(Request $request): RedirectResponse
     {
         Auth::guard('web')->logout();

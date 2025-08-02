@@ -16,8 +16,6 @@ class TanggapanController extends Controller
         return $pdf->download('laporan-tanggapan.pdf');
     }
 
-
-
     public function index()
     {
         $users = User::whereHas('pengaduans')->withCount('pengaduans')->get();
