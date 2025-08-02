@@ -1,4 +1,11 @@
-@extends('layouts.app')
+
+@extends('partials.dashboard')
+
+@section('title', 'Dashboard')
+
+@section('sidebar')
+    @include('layouts.sidebar')
+@endsection
 
 @section('content')
 <div class="container">

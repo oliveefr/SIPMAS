@@ -1,10 +1,17 @@
-@extends('layouts.app')
 
+@extends('partials.dashboard')
+
+@section('title', 'Dashboard')
+
+@section('sidebar')
+    @include('layouts.sidebar')
+@endsection
 @if(session('success'))
     <div class="alert alert-success">{{ session('success') }}</div>
+    
 @endif
-
 @section('content')
+
     <div class="container">
         <h3 class="mb-4">Detail Pengaduan: {{ $user->name }}</h3>
 

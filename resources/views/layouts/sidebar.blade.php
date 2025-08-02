@@ -11,20 +11,20 @@
     <span class="menu-title">Masyarakat</span>
   </a>
 </li>
-{{-- 
+
 <li class="nav-item">
-  <a class="nav-link" href="{{ route('pengaduan.index') }}">
+  <a class="nav-link" href="{{ route('pengaduan_admin.index') }}">
     <i class="mdi mdi-comment-alert-outline menu-icon"></i>
     <span class="menu-title">Pengaduan</span>
   </a>
-</li> --}}
+</li>
 
-<li class="nav-item">
+{{-- <li class="nav-item">
   <a class="nav-link" href="{{ route('tanggapan.index') }}">
     <i class="mdi mdi-message-reply-text menu-icon"></i>
     <span class="menu-title">Tanggapan</span>
   </a>
-</li>
+</li> --}}
 
 <li class="nav-item">
   <a class="nav-link" href="{{ route('pengaduan.cetak.pdf') }}">

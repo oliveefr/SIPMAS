@@ -5,6 +5,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PengaduanController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\TanggapanController;
+use App\Http\Controllers\PengaduanAdminController;
+use App\Http\Controllers\TanggapanAdminController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -38,13 +41,20 @@ Route::middleware('auth')->group(function () {
         Route::get('tanggapan/create/{pengaduan}', [TanggapanController::class, 'create'])->name('tanggapan.create');
         Route::get('tanggapan/{tanggapan}', [TanggapanController::class, 'show'])->name('tanggapan.show');
         Route::patch('/pengaduan/{pengaduan}/status', [PengaduanController::class, 'updateStatus'])->name('pengaduan.updateStatus');
+
+        //pengaduan admin /dasbord admin
+        Route::get('/pengaduan-admin', [PengaduanAdminController::class, 'index'])->name('pengaduan_admin.index');
+        Route::get('/pengaduan-admin/{id}', [PengaduanAdminController::class, 'show'])->name('pengaduan_admin.show');
+        //tangapan admin
+
+
+        Route::post('/tanggapan', [TanggapanAdminController::class, 'store'])->name('tanggapan.store');
     });
 
     // Khusus admin master (misal nanti ingin kelola petugas)
     Route::middleware(['role:admin_master'])->group(function () {
         // Tambahkan route CRUD petugas jika perlu
     });
-
 });
 
 require __DIR__ . '/auth.php';
