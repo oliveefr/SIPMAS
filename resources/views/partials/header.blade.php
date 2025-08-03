@@ -11,10 +11,10 @@
         </div>
     </div>
 
-    <div class="branding d-flex align-items-center">
+    <div class="branding d-flex align-items-center bg-white-smoke">
         <div class="container position-relative d-flex align-items-center justify-content-end">
-            <a href="index.html" class="logo d-flex align-items-center me-auto">
-                <img src="{{ asset('assets/img/logo/logo-SIPMAS.png') }}" alt="" style="height: 90px; width: auto;">
+            <a href="#" class="logo d-flex align-items-center me-auto mt-2 mb-2">
+                <img src="{{ asset('assets/img/logo/logo-SIPMAS.png') }}" alt="" style="height: 60px; width: auto;">
             </a>
 
             <nav id="navmenu" class="menu">

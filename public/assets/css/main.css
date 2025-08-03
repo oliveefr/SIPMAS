@@ -1,43 +1,27 @@
-/**
-* Template Name: Medicio
-* Template URL: https://bootstrapmade.com/medicio-free-bootstrap-theme/
-* Updated: Aug 07 2024 with Bootstrap v5.3.3
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-
-/*--------------------------------------------------------------
-# Font & Color Variables
-# Help: https://bootstrapmade.com/color-system/
---------------------------------------------------------------*/
-/* Fonts */
 :root {
   --default-font: "Roboto",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --heading-font: "Raleway",  sans-serif;
   --nav-font: "Poppins",  sans-serif;
 }
 
-/* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
 :root { 
-  --background-color: #ffffff; /* Background color for the entire website, including individual sections */
-  --default-color: #444444; /* Default color used for the majority of the text content across the entire website */
-  --heading-color: #555555; /* Color for headings, subheadings and title throughout the website */
-  --accent-color: #3fbbc0; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
-  --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
-  --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
+  --background-color: #ffffff;
+  --default-color: #444444;
+  --heading-color: #555555;
+  --accent-color: #002c47;
+  --surface-color: #ffffff;
+  --contrast-color: #ffffff;
 }
 
-/* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
 :root {
-  --nav-color: #444444;  /* The default color of the main navmenu links */
-  --nav-hover-color: #3fbbc0; /* Applied to main navmenu links when they are hovered over or active */
-  --nav-mobile-background-color: #ffffff; /* Used as the background color for mobile navigation menu */
-  --nav-dropdown-background-color: #ffffff; /* Used as the background color for dropdown items that appear when hovering over primary navigation items */
-  --nav-dropdown-color: #444444; /* Used for navigation links of the dropdown items in the navigation menu. */
-  --nav-dropdown-hover-color: #3fbbc0; /* Similar to --nav-hover-color, this color is applied to dropdown navigation links when they are hovered over. */
+  --nav-color: #444444;
+  --nav-hover-color: #3fbbc0;
+  --nav-mobile-background-color: #ffffff;
+  --nav-dropdown-background-color: #ffffff;
+  --nav-dropdown-color: #444444;
+  --nav-dropdown-hover-color: #3fbbc0;
 }
 
-/* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
 
 .light-background {
   --background-color: #f7fcfc;
@@ -53,10 +37,10 @@
 }
 
 .accent-background {
-  --background-color: #3fbbc0;
+  --background-color: #002c47;
   --default-color: #ffffff;
   --heading-color: #ffffff;
-  --surface-color: #65c9cd;
+  --surface-color: #002c47;
 }
 
 /* Smooth scroll */
@@ -254,8 +238,7 @@ h6 {
 }
 
 .header .logo img {
-  max-height: 36px;
-  margin-right: 8px;
+  height: 70px;
 }
 
 .header .logo h1 {
@@ -1966,5 +1949,301 @@ section,
 # Starter Section Section
 --------------------------------------------------------------*/
 .starter-section {
-  /* Add your styles here */
+  
+}
+
+.bg-navy {
+  background-color: #002c47;
+}
+
+.text-navy {
+  color: #002c47;
+}
+
+/* left slide */
+.nav-button {
+  position: relative;
+  display: inline-block;
+  padding: 12px 25px;
+  background-color: var(--surface-color);
+  box-shadow: 0px 0 25px 0 rgba(0, 0, 0, 0.1);
+  color: var(--heading-color);
+  text-decoration: none;
+  font-weight: bold;
+  overflow: hidden;
+  z-index: 1;
+  transition: all 0.3s ease-in-out;
+}
+
+.nav-button::before {
+  content: "";
+  position: absolute;
+  background: rgb(0, 178, 202);
+  inset: 0 0 0 100%;
+  transition: all 0.3s ease-in-out;
+  z-index: -1;
+}
+
+.nav-button:hover::before {
+  inset: 0;
+  border-radius: 0;
+}
+
+.nav-button:hover {
+  color: white;
+}
+
+
+/* right slide */
+.nav-button-right {
+  position: relative;
+  display: inline-block;
+  padding: 12px 25px;
+  background-color: var(--surface-color);
+  box-shadow: 0px 0 25px 0 rgba(0, 0, 0, 0.1);
+  color: var(--heading-color);
+  text-decoration: none;
+  font-weight: bold;
+  overflow: hidden;
+  z-index: 1;
+  transition: all 0.3s ease-in-out;
+}
+
+.nav-button-right::before {
+  content: "";
+  position: absolute;
+  background: rgb(0, 178, 202);
+  inset: 0 100% 0 0;
+  transition: all 0.3s ease-in-out;
+  z-index: -1;
+}
+
+.nav-button-right:hover::before {
+  inset: 0;
+  border-radius: 0;
+}
+
+.nav-button-right:hover {
+  color: white;
+}
+
+
+/* left slide */
+.button-left {
+  position: relative;
+  display: inline-block;
+  padding: 12px 25px;
+  background-color: var(--surface-color);
+  box-shadow: 0px 0 25px 0 rgba(0, 0, 0, 0.1);
+  color: var(--heading-color);
+  text-decoration: none;
+  font-weight: bold;
+  overflow: hidden;
+  z-index: 1;
+  transition: all 0.3s ease-in-out;
+}
+
+.button-left::before {
+  content: "";
+  position: absolute;
+  background: rgb(0, 178, 202);
+  inset: 0 0 0 100%;
+  transition: all 0.3s ease-in-out;
+  z-index: -1;
+}
+
+.button-left:hover::before {
+  inset: 0;
+  border-radius: 0;
+}
+
+.button-left:hover {
+  color: white;
+}
+
+
+/* right slide */
+.button-right {
+  position: relative;
+  display: inline-block;
+  padding: 12px 25px;
+  background-color: var(--surface-color);
+  box-shadow: 0px 0 25px 0 rgba(0, 0, 0, 0.1);
+  color: var(--heading-color);
+  text-decoration: none;
+  font-weight: bold;
+  overflow: hidden;
+  z-index: 1;
+  transition: all 0.3s ease-in-out;
+}
+
+.button-right::before {
+  content: "";
+  position: absolute;
+  background: rgb(0, 178, 202);
+  inset: 0 0 0 100%;
+  transition: all 0.3s ease-in-out;
+  z-index: -1;
+}
+
+.button-right:hover::before {
+  inset: 0;
+  border-radius: 0;
+}
+
+.button-right:hover {
+  color: white;
+}
+
+
+/* Efek slide untuk btn-danger */
+.btn-danger {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  z-index: 1;
+  transition: all 0.3s ease-in-out;
+  background-color: rgba(108, 117, 125, 1);
+  color: white;
+  border: none;
+}
+
+.btn-danger::before {
+  content: "";
+  position: absolute;
+  background-color: rgba(220, 53, 69, 1);
+  inset: 0 100% 0 0;
+  z-index: -1;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-danger:hover::before {
+  inset: 0;
+}
+
+.btn-danger:hover {
+  color: white;
+}
+
+
+/* Efek slide untuk btn-primary */
+.btn-primary {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  z-index: 1;
+  transition: all 0.3s ease-in-out;
+  background-color: rgba(13, 110, 253, 1);
+  color: white;
+  border: none;
+}
+
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  background-color: rgba(0, 44, 71, 1);
+  inset: 0 0 0 100%;
+  z-index: -1;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-primary:hover::before {
+  inset: 0;
+}
+
+.btn-primary:hover {
+  color: white;
+}
+
+.bg-white-smoke {
+  background-color: rgba(191, 182, 255, 0.425);
+}
+
+/* Efek slide untuk btn-success */
+.btn-success {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  z-index: 1;
+  transition: all 0.3s ease-in-out;
+  background-color: rgba(25, 135, 84, 1);
+  color: white;
+  border: none;
+}
+
+.btn-success::before {
+  content: "";
+  position: absolute;
+  background-color: rgba(0, 44, 71, 1);
+  inset: 0 0 0 100%;
+  z-index: -1;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-success:hover::before {
+  inset: 0;
+}
+
+.btn-success:hover {
+  color: white;
+}
+
+
+
+/* Efek slide untuk btn-warning */
+.btn-warning {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  z-index: 1;
+  transition: all 0.3s ease-in-out;
+  background-color: rgba(255, 193, 7, 1);
+  color: white;
+  border: none;
+}
+
+.btn-warning::before {
+  content: "";
+  position: absolute;
+  background-color: rgba(0, 44, 71, 1);
+  inset: 0 100% 0 0;
+  z-index: -1;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-warning:hover::before {
+  inset: 0;
+}
+
+.btn-warning:hover {
+  color: white;
+}
+
+/* Efek slide untuk btn-danger */
+.btn-secondary {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  z-index: 1;
+  transition: all 0.3s ease-in-out;
+  background-color: rgba(108, 117, 125, 1);
+  color: white;
+  border: none;
+}
+
+.btn-secondary::before {
+  content: "";
+  position: absolute;
+  background-color: rgba(0, 44, 71, 1);
+  inset: 0 0 0 100%;
+  z-index: -1;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-secondary:hover::before {
+  inset: 0;
+}
+
+.btn-secondary:hover {
+  color: white;
 }

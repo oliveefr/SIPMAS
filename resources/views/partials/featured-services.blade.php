@@ -30,7 +30,7 @@
     aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content bg-light border-0 rounded-4 shadow-lg">
-            <div class="modal-header bg-primary text-white">
+            <div class="modal-header bg-navy text-white">
                 <h5 class="modal-title text-white" id="buatPengaduanModalLabel"><i class="bi bi-megaphone me-2"></i> Buat Pengaduan
                     Baru</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
@@ -68,7 +68,7 @@
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-danger button-right-danger" data-bs-dismiss="modal">Batal</button>
                     <button type="submit" class="btn btn-primary">
                         <i class="bi bi-send-fill me-1"></i> Kirim Pengaduan
                     </button>
@@ -82,7 +82,7 @@
 <div class="modal fade" id="modalSemuaPengaduan" tabindex="-1" aria-labelledby="modalSemuaPengaduanLabel" aria-hidden="true">
   <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content bg-light border-0 rounded-4 shadow-lg">
-      <div class="modal-header bg-primary text-white">
+      <div class="modal-header bg-navy text-white">
         <h5 class="modal-title text-white" id="modalSemuaPengaduanLabel">
           <i class="bi bi-list-task me-2"></i> Semua Pengaduan Anda
         </h5>
@@ -113,7 +113,7 @@
                   </td>
                   <td>{{ $p->created_at->format('d-m-Y') }}</td>
                   <td>
-                    <a href="{{ route('pengaduan.show', $p->id) }}" class="btn btn-sm btn-info">Lihat</a>
+                    <a href="{{ route('pengaduan.show', $p->id) }}" class="btn btn-sm btn-info text-secondary">Lihat</a>
                     <form action="{{ route('pengaduan.destroy', $p->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin hapus?')">
                       @csrf @method('DELETE')
                       <button class="btn btn-sm btn-danger">Hapus</button>
