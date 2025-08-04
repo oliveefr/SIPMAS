@@ -52,10 +52,27 @@
                                         {{ ucfirst($item->status) }}
                                     </span>
                                 </td>
-                                <td class="border px-4 py-2">
+                                
+                                <td class="border px-4 py-2 flex gap-2">
+                                    <!-- Tombol Detail -->
                                     <a href="{{ route('pengaduan_admin.show', $item->id) }}"
-                                        class="text-blue-600 hover:underline">Detail</a>
+                                        class="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 text-sm">
+                                        Detail
+                                    </a>
+
+                                    <!-- Form Hapus -->
+                                    <form action="{{ route('pengaduan_admin.destroy', $item->id) }}" method="POST"
+                                        onsubmit="return confirm('Yakin ingin menghapus pengaduan ini?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                            class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 text-sm">
+                                            Hapus
+                                        </button>
+                                    </form>
                                 </td>
+
+                                
                             </tr>
                         @endforeach
 

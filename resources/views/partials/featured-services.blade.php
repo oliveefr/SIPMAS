@@ -14,7 +14,8 @@
                 <div class="service-item position-relative">
                     <div class="icon"><i class="fas fa-sticky-note icon"></i></div>
                     <h4>
-                        <a href="#" class="stretched-link" data-bs-toggle="modal" data-bs-target="#modalSemuaPengaduan">
+                        <a href="#" class="stretched-link" data-bs-toggle="modal"
+                            data-bs-target="#modalSemuaPengaduan">
                             Pengaduan Anda
                         </a>
                     </h4>
@@ -31,7 +32,8 @@
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content bg-light border-0 rounded-4 shadow-lg">
             <div class="modal-header bg-navy text-white">
-                <h5 class="modal-title text-white" id="buatPengaduanModalLabel"><i class="bi bi-megaphone me-2"></i> Buat Pengaduan
+                <h5 class="modal-title text-white" id="buatPengaduanModalLabel"><i class="bi bi-megaphone me-2"></i>
+                    Buat Pengaduan
                     Baru</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                     aria-label="Close"></button>
@@ -58,9 +60,25 @@
 
                     <div class="mb-3">
                         <label for="isi_laporan" class="form-label">Isi Laporan</label>
-                        <textarea name="isi_laporan" class="form-control rounded-3" id="isi_laporan" rows="5"
-                            required>{{ old('isi_laporan') }}</textarea>
+                        <textarea name="isi_laporan" class="form-control rounded-3" id="isi_laporan" rows="5" required>{{ old('isi_laporan') }}</textarea>
                     </div>
+
+                    <div class="mb-3">
+                        <label for="kategori" class="form-label">Jenis Pengaduan</label>
+                        <select name="kategori" id="kategori" class="form-control" required>
+                            <option value="">-- Pilih Pengaduan --</option>
+                            <option value="Infrastruktur" {{ old('kategori') == 'Infrastruktur' ? 'selected' : '' }}>
+                                Infrastruktur</option>
+                            <option value="Lingkungan" {{ old('kategori') == 'Lingkungan' ? 'selected' : '' }}>
+                                Lingkungan</option>
+                            <option value="Keamanan" {{ old('kategori') == 'Keamanan' ? 'selected' : '' }}>Keamanan
+                            </option>
+                            <option value="Kesehatan" {{ old('kategori') == 'Kesehatan' ? 'selected' : '' }}>Kesehatan
+                            </option>
+                            
+                        </select>
+                    </div>
+
 
                     <div class="mb-3">
                         <label for="foto" class="form-label">Unggah Foto (Opsional)</label>
@@ -68,7 +86,8 @@
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">
-                    <button type="button" class="btn btn-danger button-right-danger" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-danger button-right-danger"
+                        data-bs-dismiss="modal">Batal</button>
                     <button type="submit" class="btn btn-primary">
                         <i class="bi bi-send-fill me-1"></i> Kirim Pengaduan
                     </button>
@@ -78,57 +97,63 @@
     </div>
 </div>
 
+
 <!-- Modal Semua Pengaduan -->
-<div class="modal fade" id="modalSemuaPengaduan" tabindex="-1" aria-labelledby="modalSemuaPengaduanLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
-    <div class="modal-content bg-light border-0 rounded-4 shadow-lg">
-      <div class="modal-header bg-navy text-white">
-        <h5 class="modal-title text-white" id="modalSemuaPengaduanLabel">
-          <i class="bi bi-list-task me-2"></i> Semua Pengaduan Anda
-        </h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        {{-- Tabel Semua Pengaduan --}}
-        <div class="table-responsive">
-          <table class="table table-striped table-hover m-0">
-            <thead class="table-light">
-              <tr>
-                <th>Judul</th>
-                <th>Isi</th>
-                <th>Status</th>
-                <th>Tanggal</th>
-                <th>Aksi</th>
-              </tr>
-            </thead>
-            <tbody>
-              @forelse ($pengaduans as $p)
-                <tr>
-                  <td>{{ $p->judul }}</td>
-                  <td>{{ Str::limit($p->isi_laporan, 50) }}</td>
-                  <td>
-                    <span class="badge {{ $p->status == 'selesai' ? 'bg-success' : ($p->status == 'proses' ? 'bg-warning' : 'bg-secondary') }}">
-                      {{ ucfirst($p->status) }}
-                    </span>
-                  </td>
-                  <td>{{ $p->created_at->format('d-m-Y') }}</td>
-                  <td>
-                    <a href="{{ route('pengaduan.show', $p->id) }}" class="btn btn-sm btn-info text-secondary">Lihat</a>
-                    <form action="{{ route('pengaduan.destroy', $p->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin hapus?')">
-                      @csrf @method('DELETE')
-                      <button class="btn btn-sm btn-danger">Hapus</button>
-                    </form>
-                  </td>
-                </tr>
-              @empty
-                <tr>
-                  <td colspan="5" class="text-center text-muted">Belum ada pengaduan.</td>
-                </tr>
-              @endforelse
-            </tbody>
-          </table>
+<div class="modal fade" id="modalSemuaPengaduan" tabindex="-1" aria-labelledby="modalSemuaPengaduanLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content bg-light border-0 rounded-4 shadow-lg">
+            <div class="modal-header bg-navy text-white">
+                <h5 class="modal-title text-white" id="modalSemuaPengaduanLabel">
+                    <i class="bi bi-list-task me-2"></i> Semua Pengaduan Anda
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {{-- Tabel Semua Pengaduan --}}
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover m-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Judul</th>
+                                <th>Isi</th>
+                                <th>Status</th>
+                                <th>Tanggal</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($pengaduans as $p)
+                                <tr>
+                                    <td>{{ $p->judul }}</td>
+                                    <td>{{ Str::limit($p->isi_laporan, 50) }}</td>
+                                    <td>
+                                        <span
+                                            class="badge {{ $p->status == 'selesai' ? 'bg-success' : ($p->status == 'proses' ? 'bg-warning' : 'bg-secondary') }}">
+                                            {{ ucfirst($p->status) }}
+                                        </span>
+                                    </td>
+                                    <td>{{ $p->created_at->format('d-m-Y') }}</td>
+                                    <td>
+                                        <a href="{{ route('pengaduan.show', $p->id) }}"
+                                            class="btn btn-sm btn-info text-secondary">Lihat</a>
+                                        <form action="{{ route('pengaduan.destroy', $p->id) }}" method="POST"
+                                            class="d-inline" onsubmit="return confirm('Yakin hapus?')">
+                                            @csrf @method('DELETE')
+                                            <button class="btn btn-sm btn-danger">Hapus</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="5" class="text-center text-muted">Belum ada pengaduan.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>

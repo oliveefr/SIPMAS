@@ -68,8 +68,11 @@
                                 </a>
                             @endif
                         @endauth
-                        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+                        <i class="mobile-nav-toggle d-xl-none bi bi-list text-white"></i>
                     </nav>
+
+
+
                 @endif
             </div>
         </div>

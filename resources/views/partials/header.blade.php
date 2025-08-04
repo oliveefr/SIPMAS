@@ -11,7 +11,8 @@
         </div>
     </div>
 
-    <div class="branding d-flex align-items-center bg-white-smoke">
+    <<div class="branding d-flex align-items-center bg-white">
+
         <div class="container position-relative d-flex align-items-center justify-content-end">
             <a href="#" class="logo d-flex align-items-center me-auto mt-2 mb-2">
                 <img src="{{ asset('assets/img/logo/logo-SIPMAS.png') }}" alt="" style="height: 60px; width: auto;">
@@ -50,7 +51,7 @@
                     @endif
                 @endauth
 
-                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+                <i class="mobile-nav-toggle d-xl-none bi bi-list  text-white"></i>
             </nav>
         </div>
     </div>

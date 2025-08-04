@@ -28,6 +28,19 @@
             <textarea name="isi_laporan" class="form-control" id="isi_laporan" rows="5" required>{{ old('isi_laporan') }}</textarea>
         </div>
 
+        <!-- Dropdown Kategori -->
+        <div class="mb-3">
+            <label for="kategori" class="form-label">Kategori Laporan</label>
+            <select name="kategori" id="kategori" class="form-control" required>
+                <option value="">-- Pilih Kategori --</option>
+                <option value="Infrastruktur" {{ old('kategori') == 'Infrastruktur' ? 'selected' : '' }}>Infrastruktur</option>
+                <option value="Lingkungan" {{ old('kategori') == 'Lingkungan' ? 'selected' : '' }}>Lingkungan</option>
+                <option value="Keamanan" {{ old('kategori') == 'Keamanan' ? 'selected' : '' }}>Keamanan</option>
+                <option value="Kesehatan" {{ old('kategori') == 'Kesehatan' ? 'selected' : '' }}>Kesehatan</option>
+                <option value="Lainnya" {{ old('kategori') == 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
+            </select>
+        </div>
+
         <div class="mb-3">
             <label for="foto" class="form-label">Unggah Foto (Opsional)</label>
             <input type="file" name="foto" class="form-control" id="foto" accept="image/*">

@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\TanggapanController;
 use App\Http\Controllers\PengaduanAdminController;
 use App\Http\Controllers\TanggapanAdminController;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -27,9 +28,9 @@ Route::middleware('auth')->group(function () {
     });
     Route::post('/tanggapan', [TanggapanController::class, 'store'])->middleware('auth')->name('tanggapan.store');
 
-
     // Role: admin_master dan petugas
     Route::middleware(['role:admin_master|petugas'])->group(function () {
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::resource('tanggapan', TanggapanController::class);
         Route::resource('users', UserController::class);
         Route::get('/cetak-pengaduan-pdf', [PengaduanController::class, 'cetakPdf'])->name('pengaduan.cetak.pdf')->middleware('auth');
@@ -43,8 +44,9 @@ Route::middleware('auth')->group(function () {
         // pengaduan admin /dasboard admin
         Route::get('/pengaduan-admin', [PengaduanAdminController::class, 'index'])->name('pengaduan_admin.index');
         Route::get('/pengaduan-admin/{id}', [PengaduanAdminController::class, 'show'])->name('pengaduan_admin.show');
-        
-        // tangapan admin
+        Route::delete('/pengaduan-admin/{id}', [PengaduanAdminController::class, 'destroy'])->name('pengaduan_admin.destroy');
+
+        // pengaduan admin
         Route::post('/tanggapan', [TanggapanAdminController::class, 'store'])->name('tanggapan.store');
     });
 

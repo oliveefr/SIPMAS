@@ -6,31 +6,73 @@ use App\Models\Pengaduan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class PengaduanController extends Controller
 {
     // Cetak PDF (hanya untuk admin_master dan petugas)
     public function cetakPdf()
     {
-        if (!Auth::user()->hasAnyRole(['admin_master', 'petugas'])) {
+        $user = Auth::user();
+
+        if ($user->hasRole('admin_master')) {
+            $pengaduans = Pengaduan::with('user')->get();
+        } elseif ($user->hasRole('petugas')) {
+            $kategoriPetugas = $user->kategoriPetugas();
+            if (!$kategoriPetugas) {
+                abort(403, 'Kategori petugas tidak ditemukan.');
+            }
+            $pengaduans = Pengaduan::with('user')
+                ->where('kategori', $kategoriPetugas)
+                ->get();
+        } else {
             abort(403, 'Anda tidak memiliki akses untuk mencetak pengaduan.');
         }
 
-        $pengaduans = Pengaduan::with('user')->get();
-        $pdf = Pdf::loadView('pengaduan.cetak', compact('pengaduans'))->setPaper('a4', 'portrait');
+        $pdf = Pdf::loadView('pengaduan.cetak', compact('pengaduans'))
+                  ->setPaper('a4', 'portrait');
 
         return $pdf->download('laporan_pengaduan.pdf');
     }
 
-    public function cetakIndividual($id)
+    // Cetak PDF khusus masyarakat (hanya pengaduan miliknya)
+    public function cetakPdfMasyarakat()
     {
-        $pengaduan = Pengaduan::with('user')->findOrFail($id);
+        $user = Auth::user();
 
-        if (!Auth::user()->hasAnyRole(['admin_master', 'petugas'])) {
-            abort(403);
+        if (!$user->hasRole('masyarakat')) {
+            abort(403, 'Akses ditolak.');
         }
 
-        $pdf = Pdf::loadView('pengaduan.cetak_individual', compact('pengaduan'))->setPaper('a4');
+        $pengaduans = Pengaduan::with('user')
+            ->where('user_id', $user->id)
+            ->get();
+
+        $pdf = Pdf::loadView('pengaduan.cetak', compact('pengaduans'))
+                  ->setPaper('a4', 'portrait');
+
+        return $pdf->download('pengaduan_saya.pdf');
+    }
+
+    public function cetakIndividual($id)
+    {
+        $user = Auth::user();
+        $pengaduan = Pengaduan::with('user')->findOrFail($id);
+
+        if ($user->hasRole('admin_master')) {
+            // boleh semua
+        } elseif ($user->hasRole('petugas')) {
+            $kategoriPetugas = $user->kategoriPetugas();
+            if ($pengaduan->kategori !== $kategoriPetugas) {
+                abort(403, 'Anda tidak berhak mencetak data ini.');
+            }
+        } else {
+            abort(403, 'Anda tidak memiliki akses.');
+        }
+
+        $pdf = Pdf::loadView('pengaduan.cetak_individual', compact('pengaduan'))
+                  ->setPaper('a4');
 
         return $pdf->download('pengaduan_' . $pengaduan->user->nik . '.pdf');
     }
@@ -54,30 +96,29 @@ class PengaduanController extends Controller
         $request->validate([
             'judul' => 'required|string|max:255',
             'isi_laporan' => 'required|string',
+            'kategori' => 'required|in:Infrastruktur,Lingkungan,Keamanan,Kesehatan,Lainnya',
             'foto' => 'nullable|image|max:2048',
         ]);
 
         $filename = null;
         if ($request->hasFile('foto')) {
             $foto = $request->file('foto');
+            $filename = $foto->store('pengaduan', 'public');
 
-            // Simpan file dan ambil nama file
-            $filename = $foto->store('pengaduan', 'public'); // simpan ke storage/app/public/pengaduan/
-
-            // Debug: Cek apakah filename tidak null
             if ($filename) {
-                \Log::info('File uploaded: ' . $filename);
+                Log::info('File uploaded: ' . $filename);
             } else {
-                \Log::error('File upload failed.');
+                Log::error('File upload failed.');
             }
         } else {
-            \Log::warning('No file uploaded.');
+            Log::warning('No file uploaded.');
         }
 
         Pengaduan::create([
             'user_id' => Auth::id(),
             'judul' => $request->judul,
             'isi_laporan' => $request->isi_laporan,
+            'kategori' => $request->kategori,
             'foto' => $filename,
             'status' => 'pending',
         ]);
@@ -95,12 +136,8 @@ class PengaduanController extends Controller
         $pengaduan->status = $request->status;
         $pengaduan->save();
 
-        return redirect()->back()->with('success', 'Status pengaduan berhasil diubah.');
+        return back()->with('success', 'Status pengaduan berhasil diubah.');
     }
-
-
-
-
 
     // Masyarakat: Lihat detail pengaduan
     public function show(Pengaduan $pengaduan)
@@ -137,14 +174,13 @@ class PengaduanController extends Controller
 
         $filename = $pengaduan->foto;
         if ($request->hasFile('foto')) {
-            if ($filename && \Storage::exists('public/' . $filename)) {
-                \Storage::delete('public/' . $filename);
+            if ($filename && Storage::exists('public/' . $filename)) {
+                Storage::delete('public/' . $filename);
             }
 
             $foto = $request->file('foto');
-            $filename = $foto->store('pengaduan', 'public'); // Simpan ke folder public/pengaduan
+            $filename = $foto->store('pengaduan', 'public');
         }
-
 
         $pengaduan->update([
             'judul' => $request->judul,
@@ -162,8 +198,8 @@ class PengaduanController extends Controller
             abort(403);
         }
 
-        if ($pengaduan->foto && \Storage::disk('public')->exists($pengaduan->foto)) {
-            \Storage::disk('public')->delete($pengaduan->foto);
+        if ($pengaduan->foto && Storage::disk('public')->exists($pengaduan->foto)) {
+            Storage::disk('public')->delete($pengaduan->foto);
         }
 
         $pengaduan->delete();

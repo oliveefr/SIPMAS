@@ -8,11 +8,30 @@ use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::role('masyarakat')->get();
+        // Mulai query
+        $query = User::role('masyarakat');
+
+        // Tambahkan filter
+        if ($request->filter == 'today') {
+            $query->whereDate('created_at', today());
+        } elseif ($request->filter == 'week') {
+            $query->whereBetween('created_at', [
+                now()->startOfWeek(),
+                now()->endOfWeek()
+            ]);
+        } elseif ($request->filter == 'month') {
+            $query->whereMonth('created_at', now()->month)
+                ->whereYear('created_at', now()->year);
+        }
+
+        // Ambil data dengan pagination
+        $users = $query->paginate(10);
+
         return view('users.index', compact('users'));
     }
+
 
     public function create()
     {

@@ -5,12 +5,15 @@
   </a>
 </li>
 
+@hasrole('admin_master')
 <li class="nav-item">
   <a class="nav-link" href="{{ route('users.index') }}">
     <i class="mdi mdi-account-group-outline menu-icon"></i>
     <span class="menu-title">Masyarakat</span>
   </a>
 </li>
+@endhasrole
+
 
 <li class="nav-item">
   <a class="nav-link" href="{{ route('pengaduan_admin.index') }}">
