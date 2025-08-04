@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -10,7 +9,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasRoles, HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasRoles;
 
     protected $fillable = [
         'name',
@@ -19,10 +18,12 @@ class User extends Authenticatable
         'no_hp',
         'password',
     ];
+
     protected $hidden = [
         'password',
         'remember_token',
     ];
+
     protected function casts(): array
     {
         return [
@@ -31,15 +32,26 @@ class User extends Authenticatable
         ];
     }
 
-    // User.php
+    /**
+     * Relasi ke pengaduan
+     */
     public function pengaduan()
     {
         return $this->hasMany(Pengaduan::class);
     }
 
-    public function pengaduans()
+    /**
+     * Ambil kategori sesuai nama petugas
+     */
+    public function kategoriPetugas(): ?string
     {
-        return $this->hasMany(\App\Models\Pengaduan::class);
-    }
+        $mapping = [
+            'Reza Aditya' => 'Keamanan',
+            'Budi'        => 'Lingkungan',
+            'Andi'        => 'Infrastruktur',
+            'Siti'        => 'Kesehatan',
+        ];
 
+        return $mapping[$this->name] ?? null;
+    }
 }

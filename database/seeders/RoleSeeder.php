@@ -28,17 +28,56 @@ class RoleSeeder extends Seeder
             $admin->assignRole('admin_master');
         }
 
-        // Petugas
-        $petugas = User::firstOrCreate(
-            ['email' => 'petugas@sipmas.com'],
+        // Petugas kategori Keamanan
+        $petugasKeamanan = User::firstOrCreate(
+            ['email' => 'reza@sipmas.com'],
             [
-                'name' => 'Petugas Satu',
+                'name' => 'Reza Aditya',
                 'nik' => '1234567890000002',
                 'password' => bcrypt('password'),
             ]
         );
-        if (!$petugas->hasRole('petugas')) {
-            $petugas->assignRole('petugas');
+        if (!$petugasKeamanan->hasRole('petugas')) {
+            $petugasKeamanan->assignRole('petugas');
+        }
+
+        // Petugas kategori Lingkungan
+        $petugasLingkungan = User::firstOrCreate(
+            ['email' => 'budi@sipmas.com'],
+            [
+                'name' => 'Budi',
+                'nik' => '1234567890000004',
+                'password' => bcrypt('password'),
+            ]
+        );
+        if (!$petugasLingkungan->hasRole('petugas')) {
+            $petugasLingkungan->assignRole('petugas');
+        }
+
+        // Petugas kategori Infrastruktur
+        $petugasInfrastruktur = User::firstOrCreate(
+            ['email' => 'andi@sipmas.com'],
+            [
+                'name' => 'Andi',
+                'nik' => '1234567890000005',
+                'password' => bcrypt('password'),
+            ]
+        );
+        if (!$petugasInfrastruktur->hasRole('petugas')) {
+            $petugasInfrastruktur->assignRole('petugas');
+        }
+
+        // Petugas kategori Kesehatan
+        $petugasKesehatan = User::firstOrCreate(
+            ['email' => 'siti@sipmas.com'],
+            [
+                'name' => 'Siti',
+                'nik' => '1234567890000006',
+                'password' => bcrypt('password'),
+            ]
+        );
+        if (!$petugasKesehatan->hasRole('petugas')) {
+            $petugasKesehatan->assignRole('petugas');
         }
 
         // Masyarakat
@@ -46,7 +85,7 @@ class RoleSeeder extends Seeder
             ['email' => 'user@sipmas.com'],
             [
                 'name' => 'Warga Biasa',
-                'nik' => '1234567890000003',
+                'nik' => '1234567890000007',
                 'password' => bcrypt('password'),
             ]
         );
