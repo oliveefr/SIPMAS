@@ -53,7 +53,6 @@ class TanggapanController extends Controller
         return view('tanggapan.show', compact('tanggapan'));
     }
 
-
     public function edit(Tanggapan $tanggapan)
     {
         return view('tanggapan.edit', compact('tanggapan'));

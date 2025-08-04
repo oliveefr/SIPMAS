@@ -18,7 +18,7 @@ class TanggapanAdminController extends Controller
 
         Tanggapan::create([
             'pengaduan_id' => $request->pengaduan_id,
-            'user_id' => Auth::id(), // ID petugas/admin yang sedang login
+            'user_id' => Auth::id(),
             'isi_tanggapan' => $request->isi_tanggapan,
             'tanggal_tanggapan' => now(),
         ]);

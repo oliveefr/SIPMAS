@@ -8,7 +8,6 @@ use App\Http\Controllers\TanggapanController;
 use App\Http\Controllers\PengaduanAdminController;
 use App\Http\Controllers\TanggapanAdminController;
 
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -18,7 +17,6 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -42,18 +40,16 @@ Route::middleware('auth')->group(function () {
         Route::get('tanggapan/{tanggapan}', [TanggapanController::class, 'show'])->name('tanggapan.show');
         Route::patch('/pengaduan/{pengaduan}/status', [PengaduanController::class, 'updateStatus'])->name('pengaduan.updateStatus');
 
-        //pengaduan admin /dasbord admin
+        // pengaduan admin /dasboard admin
         Route::get('/pengaduan-admin', [PengaduanAdminController::class, 'index'])->name('pengaduan_admin.index');
         Route::get('/pengaduan-admin/{id}', [PengaduanAdminController::class, 'show'])->name('pengaduan_admin.show');
-        //tangapan admin
-
-
+        
+        // tangapan admin
         Route::post('/tanggapan', [TanggapanAdminController::class, 'store'])->name('tanggapan.store');
     });
 
     // Khusus admin master (misal nanti ingin kelola petugas)
     Route::middleware(['role:admin_master'])->group(function () {
-        // Tambahkan route CRUD petugas jika perlu
     });
 });
 

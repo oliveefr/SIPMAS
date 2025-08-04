@@ -15,10 +15,7 @@ class AuthenticatedSessionController extends Controller
     {
         return view('auth.login');
     }
-
-    /**
-     * Proses login pengguna.
-     */
+    
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
