@@ -47,35 +47,47 @@
 
         <div class="branding d-flex align-items-center">
             <div class="container position-relative d-flex align-items-center justify-content-end">
-                <a href="#" class="logo d-flex align-items-center me-auto ">
+                <a href="#" class="logo d-flex align-items-center me-auto">
                     <img src="{{ asset('assets/img/logo/logo-SIPMAS.png') }}" alt="">
                 </a>
 
                 @if (Route::has('login'))
                     <nav id="navmenu" class="menu">
                         @auth
-                            <a href="{{ route('pengaduan.index') }}" class="cta-btn nav-button rounded-pill">
+                            @php
+                                if (auth()->user()->hasRole('admin_master')) {
+                                    $route = route('dashboard');
+                                } else {
+                                    $route = route('pengaduan.index');
+                                }
+                            @endphp
+
+                            <a href="{{ $route }}" class="cta-btn nav-button rounded-pill">
                                 Dashboard
                             </a>
                         @else
-                            <a href="{{ route('login') }}" class="cta-btn nav-button rounded-pill">
-                                Log in
-                            </a>
-
-                            @if (Route::has('register'))
-                                <a href="{{ route('register') }}" class="cta-btn nav-button-right rounded-pill">
-                                    Register
+                            <!-- Tombol Login & Register Horizontal -->
+                            <div class="flex flex-row flex-wrap gap-2 items-center">
+                                <a href="{{ route('login') }}"
+                                    class="cta-btn nav-button rounded-full px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 text-center">
+                                    Login
                                 </a>
-                            @endif
+
+                                @if (Route::has('register'))
+                                    <a href="{{ route('register') }}"
+                                        class="cta-btn nav-button-right rounded-full px-4 py-2 bg-gray-200 text-gray-800 hover:bg-gray-300 text-center">
+                                        Register
+                                    </a>
+                                @endif
+                            </div>
                         @endauth
+
                         <i class="mobile-nav-toggle d-xl-none bi bi-list text-white"></i>
                     </nav>
-
-
-
                 @endif
             </div>
         </div>
+
     </header>
 
     <main class="main">

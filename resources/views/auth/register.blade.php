@@ -1,58 +1,153 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
+<!DOCTYPE html>
+<html lang="id">
 
-        <!-- NIK -->
-        <div>
-            <x-input-label for="nik" :value="__('NIK')" />
-            <x-text-input id="nik" class="block mt-1 w-full" type="text" name="nik" :value="old('nik')" required autofocus />
-            <x-input-error :messages="$errors->get('nik')" class="mt-2" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registrasi SIPMAS</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js" type="module"></script>
+</head>
+
+<body class="bg-white">
+  <div class="min-h-screen flex items-center justify-center px-4 py-10">
+    <div class="bg-white rounded-2xl shadow-xl w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 border border-gray-200 overflow-hidden">
+
+      <!-- Animasi desktop -->
+      <div class="hidden md:flex flex-col items-center justify-center bg-indigo-50 p-8 text-center">
+        <dotlottie-wc
+          src="https://lottie.host/04e92c18-8de9-48d4-81c1-cc495d526045/nQPYYH007Y.lottie"
+          style="width: 100%; max-width: 450px; height: auto;" speed="1" autoplay loop>
+        </dotlottie-wc>
+
+        <!-- Deskripsi SIPMAS -->
+        <div class="mt-6 px-4 text-center">
+          <h3 class="text-lg font-semibold text-gray-800">SIPMAS</h3>
+          <p class="text-sm text-gray-600 mt-2">
+            Sistem untuk menyampaikan laporan dan pengaduan masyarakat secara cepat dan mudah.
+          </p>
+        </div>
+      </div>
+
+      <!-- Form Registrasi -->
+      <div class="p-6 sm:p-10">
+        <!-- Animasi mobile -->
+        <div class="block md:hidden mb-6 flex justify-center">
+          <dotlottie-wc
+            src="https://lottie.host/04e92c18-8de9-48d4-81c1-cc495d526045/nQPYYH007Y.lottie"
+            style="width: 100%; max-width: 250px; height: auto;" speed="1" autoplay loop>
+          </dotlottie-wc>
         </div>
 
-        <!-- Name -->
-        <div class="mt-4">
-            <x-input-label for="name" :value="__('Nama Lengkap')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+        <!-- Judul -->
+        <div class="text-center mb-8">
+          <h2 class="text-3xl font-bold text-gray-900">Registrasi SIPMAS</h2>
+          <p class="text-gray-500 text-sm">
+            Daftarkan akun Anda untuk mulai melaporkan pengaduan.
+          </p>
         </div>
 
-        <!-- Email -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
+        <!-- Form -->
+        <form method="POST" action="{{ route('register') }}" class="space-y-5">
+          @csrf
 
-        <!-- No HP -->
-        <div class="mt-4">
-            <x-input-label for="no_hp" :value="__('No. HP')" />
-            <x-text-input id="no_hp" class="block mt-1 w-full" type="text" name="no_hp" :value="old('no_hp')" required />
-            <x-input-error :messages="$errors->get('no_hp')" class="mt-2" />
-        </div>
+          <!-- NIK -->
+          <div>
+            <input
+              id="nik"
+              type="text"
+              name="nik"
+              placeholder="NIK"
+              class="block w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"
+              value="{{ old('nik') }}"
+              required
+              autofocus
+            />
+            <x-input-error :messages="$errors->get('nik')" class="mt-1 text-sm text-red-600" />
+          </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
+          <!-- Nama Lengkap -->
+          <div>
+            <input
+              id="name"
+              type="text"
+              name="name"
+              placeholder="Nama Lengkap"
+              class="block w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"
+              value="{{ old('name') }}"
+              required
+            />
+            <x-input-error :messages="$errors->get('name')" class="mt-1 text-sm text-red-600" />
+          </div>
 
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Konfirmasi Password')" />
-            <x-text-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required />
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
+          <!-- Email -->
+          <div>
+            <input
+              id="email"
+              type="email"
+              name="email"
+              placeholder="Email"
+              class="block w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"
+              value="{{ old('email') }}"
+              required
+            />
+            <x-input-error :messages="$errors->get('email')" class="mt-1 text-sm text-red-600" />
+          </div>
 
-        <!-- Tombol Register -->
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                {{ __('Sudah terdaftar?') }}
-            </a>
+          <!-- No HP -->
+          <div>
+            <input
+              id="no_hp"
+              type="text"
+              name="no_hp"
+              placeholder="No. HP"
+              class="block w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"
+              value="{{ old('no_hp') }}"
+              required
+            />
+            <x-input-error :messages="$errors->get('no_hp')" class="mt-1 text-sm text-red-600" />
+          </div>
 
-            <x-primary-button class="ms-4">
-                {{ __('Daftar') }}
+          <!-- Password -->
+          <div>
+            <input
+              id="password"
+              type="password"
+              name="password"
+              placeholder="Password"
+              class="block w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"
+              required
+            />
+            <x-input-error :messages="$errors->get('password')" class="mt-1 text-sm text-red-600" />
+          </div>
+
+          <!-- Konfirmasi Password -->
+          <div>
+            <input
+              id="password_confirmation"
+              type="password"
+              name="password_confirmation"
+              placeholder="Konfirmasi Password"
+              class="block w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"
+              required
+            />
+            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-1 text-sm text-red-600" />
+          </div>
+
+          <!-- Tombol Daftar -->
+          <div class="flex items-center justify-between">
+            <p class="text-sm text-gray-600">
+              
+              <a href="{{ route('login') }}" class="text-indigo-600 hover:underline font-medium">Masuk di sini</a>
+            </p>
+            <x-primary-button class="py-3 px-6 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700">
+              {{ __('Daftar') }}
             </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

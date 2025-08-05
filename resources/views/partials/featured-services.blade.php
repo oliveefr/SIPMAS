@@ -52,16 +52,6 @@
                         </div>
                     @endif
 
-                    <div class="mb-3">
-                        <label for="judul" class="form-label">Judul Pengaduan</label>
-                        <input type="text" name="judul" class="form-control rounded-pill" id="judul"
-                            value="{{ old('judul') }}" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="isi_laporan" class="form-label">Isi Laporan</label>
-                        <textarea name="isi_laporan" class="form-control rounded-3" id="isi_laporan" rows="5" required>{{ old('isi_laporan') }}</textarea>
-                    </div>
 
                     <div class="mb-3">
                         <label for="kategori" class="form-label">Jenis Pengaduan</label>
@@ -75,9 +65,21 @@
                             </option>
                             <option value="Kesehatan" {{ old('kategori') == 'Kesehatan' ? 'selected' : '' }}>Kesehatan
                             </option>
-                            
+
                         </select>
                     </div>
+
+                    <div class="mb-3">
+                        <label for="judul" class="form-label">Judul Pengaduan</label>
+                        <input type="text" name="judul" class="form-control rounded-pill" id="judul"
+                            value="{{ old('judul') }}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="isi_laporan" class="form-label">Isi Laporan</label>
+                        <textarea name="isi_laporan" class="form-control rounded-3" id="isi_laporan" rows="5" required>{{ old('isi_laporan') }}</textarea>
+                    </div>
+
 
 
                     <div class="mb-3">
